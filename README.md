@@ -1,5 +1,5 @@
 # ArrMan-A-library-for-Array-Manipulation
-This project is just for demonstration my coding skill
+**This library is just for demonstration my coding skill and a utility that i use in my own project**
 
 Using the library:
 
