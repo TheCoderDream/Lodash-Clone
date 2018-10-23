@@ -267,4 +267,61 @@ class ArrMan {
 
         return result;
     }
+
+    static reverse(arr) {
+        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+
+        const reversedArr = [];
+
+        for(let i = arr.length -1; i >= 0 ; i--) {
+            reversedArr.push(arr[i]);
+        }
+        return reversedArr;
+    }
+
+    static slice(arr, start, end) {
+        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+
+        const slicedArr = [];
+        let startIndex = (start && start < arr.length)? start : 0;
+        let endIndex = (end && end <= arr.length) ? end:  arr.length;
+
+        for(let i = startIndex; i < endIndex; i++) {
+            slicedArr.push(arr[i]);
+        }
+
+        return slicedArr;
+
+    }
+
+    static take(arr, end) {
+        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+
+        if(!end) end = 1;
+        if(end >arr.length) end = arr.length;
+
+        const takens =[];
+
+        for(let i = 0; i< end; i++) {
+            takens.push(arr[i]);
+        }
+
+        return takens;
+    }
+
+    static takeRight(arr, end) {
+        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+
+        if(!end) end = arr.length -2;
+        if(end >arr.length) end = -1;
+
+        const takens =[];
+
+        for(let i = arr.length -1 ; i > end; i--) {
+            takens.push(arr[i]);
+        }
+
+        return takens;
+    }
+
 }
