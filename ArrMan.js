@@ -324,4 +324,27 @@ class ArrMan {
         return takens;
     }
 
+    static flat(arr) {
+        return [].concat.apply([], arr);
+    }
+
+    static flatDeep(arr) {
+        return arr.reduce((acc, flatten) => {
+            return acc.concat(Array.isArray(flatten)? ArrMan.flatDeep(flatten): flatten);
+        }, []);
+    }
+
+    static union() {
+        const arr = ArrMan.flat(Array.from(arguments));
+        const dic = ArrMan.arrMaper(arr);
+
+        const uniqValues = [];
+
+        for(let key in dic) {
+            uniqValues.push(key);
+        }
+
+        return uniqValues;
+    }
+
 }
