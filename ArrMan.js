@@ -347,4 +347,26 @@ class ArrMan {
         return uniqValues;
     }
 
+    static forEach(objOrArr, func) {
+        const type = Object.prototype.toString.call(objOrArr);
+
+        switch (type) {
+            case '[object Array]':
+                for(let i = 0; i <objOrArr.length; i++) {
+                    func(objOrArr[i], i, objOrArr);
+                }
+                break;
+            case '[object Object]':
+                for(let key in objOrArr) {
+                    if(objOrArr.hasOwnProperty(key)) {
+                        func(objOrArr[key], key);
+                    }
+                }
+                break;
+            default:
+                return new Error('Invalid type');
+        }
+
+    }
+
 }
