@@ -369,4 +369,81 @@ class ArrMan {
 
     }
 
+    static forEach(objOrArr, func) {
+        const type = Object.prototype.toString.call(objOrArr);
+
+        switch (type) {
+            case '[object Array]':
+                for(let i = 0; i <objOrArr.length; i++) {
+                    func(objOrArr[i], i, objOrArr);
+                }
+                break;
+            case '[object Object]':
+                for(let key in objOrArr) {
+                    if(objOrArr.hasOwnProperty(key)) {
+                        func(objOrArr[key], key);
+                    }
+                }
+                break;
+            default:
+                return new Error('Invalid type');
+        }
+
+    }
+
+    static forEachRight(arr, func) {
+        for(let i = arr.length -1; i > -1; i--) {
+            func(arr[i], i, arr);
+        }
+    }
+
+    static map(objOrArr, func) {
+        const type = Object.prototype.toString.call(objOrArr);
+        const result = [];
+        switch (type) {
+            case '[object Array]':
+                for(let i = 0; i <objOrArr.length; i++) {
+                    result.push(func(objOrArr[i], i, objOrArr));
+                }
+                break;
+            case '[object Object]':
+                for(let key in objOrArr) {
+                    if(objOrArr.hasOwnProperty(key)) {
+                        result.push(func(objOrArr[key], key));
+                    }
+                }
+                break;
+            default:
+                return new Error('Invalid type');
+        }
+
+        return result;
+    }
+
+    static filter(arr, funcOrFilter) {
+        const type = Object.prototype.toString.call(funcOrFilter);
+        const filtredArr = [];
+
+        switch (type) {
+            case '[object Function]':
+                for(let i = 0; i < arr.length; i++) {
+                    if(funcOrFilter(arr[i], i, arr)) filtredArr.push({...arr[i]});
+                }
+                break;
+            case '[object String]':
+                for(let i = 0; i < arr.length; i++) {
+                    if(arr[i][funcOrFilter]) filtredArr.push({...arr[i]});
+                }
+                break;
+
+            case '[object Array]':
+                for(let i = 0; i < arr.length; i++) {
+                    if(arr[i][funcOrFilter[0]] === funcOrFilter[1]) filtredArr.push({...arr[i]});
+                }
+                break;
+        }
+
+        return filtredArr;
+    }
+
 }
