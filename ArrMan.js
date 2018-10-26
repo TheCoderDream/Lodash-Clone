@@ -671,4 +671,78 @@ class ArrMan {
         return foundValue;
     }
 
+    static every(arr, predicate) {
+        const type = Object.prototype.toString.call(predicate);
+
+        let isTrue = true;
+
+        switch (type) {
+            case '[object Function]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (!predicate(arr[i], i, arr)) {
+                        isTrue = false;
+                        break;
+                    }
+                }
+                break;
+            case '[object String]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (!arr[i][predicate]) {
+                        isTrue = false;
+                        break;
+                    }
+                }
+                break;
+
+            case '[object Array]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (!arr[i][predicate[0]] === predicate[1]) {
+                        isTrue = false;
+                        break;
+                    }
+                }
+                break;
+        }
+
+        return isTrue;
+
+    }
+
+    static some(arr, predicate) {
+        const type = Object.prototype.toString.call(predicate);
+
+        let isTrue = false;
+
+        switch (type) {
+            case '[object Function]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (predicate(arr[i], i, arr)) {
+                        isTrue = true;
+                        break;
+                    }
+                }
+                break;
+            case '[object String]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i][predicate]) {
+                        isTrue = true;
+                        break;
+                    }
+                }
+                break;
+
+            case '[object Array]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i][predicate[0]] === predicate[1]) {
+                        isTrue = true;
+                        break;
+                    }
+                }
+                break;
+        }
+
+        return isTrue;
+
+    }
+
 }
