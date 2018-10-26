@@ -3,12 +3,13 @@ class ArrMan {
     static arrMaper(arr) {
         const arrMap = {};
 
-        for(let el of arr) {
+        for (let el of arr) {
             arrMap[el] = arrMap[el] + 1 || 1;
         }
 
         return arrMap;
     }
+
     static chunk(arr, n) {
         const result = [];
 
@@ -176,15 +177,15 @@ class ArrMan {
             arrsMap.push(arrMap);
         }
 
-        for(let key in arrsMap[0]) {
+        for (let key in arrsMap[0]) {
 
             let isTrue = true;
-            for(let i = 1; i < arrsMap.length; i++) {
-                if(!arrsMap[i][key]) {
+            for (let i = 1; i < arrsMap.length; i++) {
+                if (!arrsMap[i][key]) {
                     isTrue = false;
                     continue;
                 }
-                if(i === arrsMap.length -1 && isTrue) {
+                if (i === arrsMap.length - 1 && isTrue) {
                     result.push(key);
                 }
             }
@@ -194,7 +195,7 @@ class ArrMan {
     }
 
     static join(arr, sep) {
-        if(!arr || arr.length === 0) return '';
+        if (!arr || arr.length === 0) return '';
         let newStr = '';
         for (let el of arr) {
             newStr += el + sep;
@@ -204,7 +205,7 @@ class ArrMan {
     }
 
     static last(arr) {
-        return (arr && arr.length !== 0) ? arr[arr.length -1] : void 0;
+        return (arr && arr.length !== 0) ? arr[arr.length - 1] : void 0;
     }
 
     static lastIndexOf(arr, val, fromIndex) {
@@ -212,7 +213,7 @@ class ArrMan {
         const startIndex = (fromIndex && fromIndex > -1 && fromIndex < arr.length) ? fromIndex : 0;
 
         let foundedIndex = -1;
-        for (let i = arr.length -1 ; i >= startIndex; i--) {
+        for (let i = arr.length - 1; i >= startIndex; i--) {
             if (val === arr[i]) {
                 foundedIndex = i;
                 break;
@@ -222,12 +223,12 @@ class ArrMan {
         return foundedIndex;
     }
 
-    static pull(arr,...vals) {
+    static pull(arr, ...vals) {
         const valsMap = ArrMan.arrMaper(vals);
         const result = [];
 
-        for(let i = 0; i < arr.length; i++) {
-            if(!valsMap[arr[i]]) {
+        for (let i = 0; i < arr.length; i++) {
+            if (!valsMap[arr[i]]) {
                 result.push(arr[i]);
             }
         }
@@ -235,17 +236,18 @@ class ArrMan {
 
         return result;
     }
-    static pullInTheSameArr(arr,...vals) {
+
+    static pullInTheSameArr(arr, ...vals) {
         const valsMap = ArrMan.arrMaper(vals);
         const removedIndexses = [];
 
-        for(let i = 0; i < arr.length; i++) {
-            if(valsMap[arr[i]]) {
-                removedIndexses.push(i );
+        for (let i = 0; i < arr.length; i++) {
+            if (valsMap[arr[i]]) {
+                removedIndexses.push(i);
             }
         }
         let removedSize = 0;
-        for(let i of removedIndexses) {
+        for (let i of removedIndexses) {
             arr.splice(i - removedSize);
             removedSize++;
         }
@@ -258,8 +260,8 @@ class ArrMan {
         const valsMap = ArrMan.arrMaper(vals);
         const result = [];
 
-        for(let i = 0; i < arr.length; i++) {
-            if(!valsMap[arr[i]]) {
+        for (let i = 0; i < arr.length; i++) {
+            if (!valsMap[arr[i]]) {
                 result.push(arr[i]);
             }
         }
@@ -269,24 +271,24 @@ class ArrMan {
     }
 
     static reverse(arr) {
-        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+        if (!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
 
         const reversedArr = [];
 
-        for(let i = arr.length -1; i >= 0 ; i--) {
+        for (let i = arr.length - 1; i >= 0; i--) {
             reversedArr.push(arr[i]);
         }
         return reversedArr;
     }
 
     static slice(arr, start, end) {
-        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+        if (!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
 
         const slicedArr = [];
-        let startIndex = (start && start < arr.length)? start : 0;
-        let endIndex = (end && end <= arr.length) ? end:  arr.length;
+        let startIndex = (start && start < arr.length) ? start : 0;
+        let endIndex = (end && end <= arr.length) ? end : arr.length;
 
-        for(let i = startIndex; i < endIndex; i++) {
+        for (let i = startIndex; i < endIndex; i++) {
             slicedArr.push(arr[i]);
         }
 
@@ -295,14 +297,14 @@ class ArrMan {
     }
 
     static take(arr, end) {
-        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+        if (!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
 
-        if(!end) end = 1;
-        if(end >arr.length) end = arr.length;
+        if (!end) end = 1;
+        if (end > arr.length) end = arr.length;
 
-        const takens =[];
+        const takens = [];
 
-        for(let i = 0; i< end; i++) {
+        for (let i = 0; i < end; i++) {
             takens.push(arr[i]);
         }
 
@@ -310,14 +312,14 @@ class ArrMan {
     }
 
     static takeRight(arr, end) {
-        if(!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
+        if (!arr || arr.length === 0 || Object.prototype.toString.call(arr) !== '[object Array]') return;
 
-        if(!end) end = arr.length -2;
-        if(end >arr.length) end = -1;
+        if (!end) end = arr.length - 2;
+        if (end > arr.length) end = -1;
 
-        const takens =[];
+        const takens = [];
 
-        for(let i = arr.length -1 ; i > end; i--) {
+        for (let i = arr.length - 1; i > end; i--) {
             takens.push(arr[i]);
         }
 
@@ -330,7 +332,7 @@ class ArrMan {
 
     static flatDeep(arr) {
         return arr.reduce((acc, flatten) => {
-            return acc.concat(Array.isArray(flatten)? ArrMan.flatDeep(flatten): flatten);
+            return acc.concat(Array.isArray(flatten) ? ArrMan.flatDeep(flatten) : flatten);
         }, []);
     }
 
@@ -340,7 +342,7 @@ class ArrMan {
 
         const uniqValues = [];
 
-        for(let key in dic) {
+        for (let key in dic) {
             uniqValues.push(key);
         }
 
@@ -352,13 +354,13 @@ class ArrMan {
 
         switch (type) {
             case '[object Array]':
-                for(let i = 0; i <objOrArr.length; i++) {
+                for (let i = 0; i < objOrArr.length; i++) {
                     func(objOrArr[i], i, objOrArr);
                 }
                 break;
             case '[object Object]':
-                for(let key in objOrArr) {
-                    if(objOrArr.hasOwnProperty(key)) {
+                for (let key in objOrArr) {
+                    if (objOrArr.hasOwnProperty(key)) {
                         func(objOrArr[key], key);
                     }
                 }
@@ -374,13 +376,13 @@ class ArrMan {
 
         switch (type) {
             case '[object Array]':
-                for(let i = 0; i <objOrArr.length; i++) {
+                for (let i = 0; i < objOrArr.length; i++) {
                     func(objOrArr[i], i, objOrArr);
                 }
                 break;
             case '[object Object]':
-                for(let key in objOrArr) {
-                    if(objOrArr.hasOwnProperty(key)) {
+                for (let key in objOrArr) {
+                    if (objOrArr.hasOwnProperty(key)) {
                         func(objOrArr[key], key);
                     }
                 }
@@ -392,7 +394,7 @@ class ArrMan {
     }
 
     static forEachRight(arr, func) {
-        for(let i = arr.length -1; i > -1; i--) {
+        for (let i = arr.length - 1; i > -1; i--) {
             func(arr[i], i, arr);
         }
     }
@@ -402,13 +404,13 @@ class ArrMan {
         const result = [];
         switch (type) {
             case '[object Array]':
-                for(let i = 0; i <objOrArr.length; i++) {
+                for (let i = 0; i < objOrArr.length; i++) {
                     result.push(func(objOrArr[i], i, objOrArr));
                 }
                 break;
             case '[object Object]':
-                for(let key in objOrArr) {
-                    if(objOrArr.hasOwnProperty(key)) {
+                for (let key in objOrArr) {
+                    if (objOrArr.hasOwnProperty(key)) {
                         result.push(func(objOrArr[key], key));
                     }
                 }
@@ -426,19 +428,46 @@ class ArrMan {
 
         switch (type) {
             case '[object Function]':
-                for(let i = 0; i < arr.length; i++) {
-                    if(funcOrFilter(arr[i], i, arr)) filtredArr.push({...arr[i]});
+                for (let i = 0; i < arr.length; i++) {
+                    if (funcOrFilter(arr[i], i, arr)) filtredArr.push({...arr[i]});
                 }
                 break;
             case '[object String]':
-                for(let i = 0; i < arr.length; i++) {
-                    if(arr[i][funcOrFilter]) filtredArr.push({...arr[i]});
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i][funcOrFilter]) filtredArr.push({...arr[i]});
                 }
                 break;
 
             case '[object Array]':
-                for(let i = 0; i < arr.length; i++) {
-                    if(arr[i][funcOrFilter[0]] === funcOrFilter[1]) filtredArr.push({...arr[i]});
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i][funcOrFilter[0]] === funcOrFilter[1]) filtredArr.push({...arr[i]});
+                }
+                break;
+        }
+
+        return filtredArr;
+    }
+
+
+    static reject(arr, funcOrFilter) {
+        const type = Object.prototype.toString.call(funcOrFilter);
+        const filtredArr = [];
+
+        switch (type) {
+            case '[object Function]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (!funcOrFilter(arr[i], i, arr)) filtredArr.push({...arr[i]});
+                }
+                break;
+            case '[object String]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (!arr[i][funcOrFilter]) filtredArr.push({...arr[i]});
+                }
+                break;
+
+            case '[object Array]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (!arr[i][funcOrFilter[0]] === funcOrFilter[1]) filtredArr.push({...arr[i]});
                 }
                 break;
         }
@@ -453,25 +482,25 @@ class ArrMan {
 
         switch (type) {
             case '[object Array]':
-                if(!initialValue) {
+                if (!initialValue) {
                     acc = arrOrObj[0];
                     startIndex++
                 } else {
                     acc = initialValue;
                 }
 
-                for (let i = startIndex; i < arrOrObj.length; i ++) {
+                for (let i = startIndex; i < arrOrObj.length; i++) {
                     acc = func(acc, arrOrObj[i], i, arrOrObj);
                 }
                 break;
             case '[object Object]': {
                 const keys = Object.keys(arrOrObj);
                 const values = Object.values(arrOrObj);
-                if(!initialValue) {
+                if (!initialValue) {
                     acc = values[0];
                     startIndex++;
                 }
-                for(let i = startIndex; i < keys.length; i++) {
+                for (let i = startIndex; i < keys.length; i++) {
                     acc = func(acc, values[i], keys[i]);
                 }
                 break;
@@ -491,9 +520,9 @@ class ArrMan {
 
         switch (type) {
             case '[object Array]':
-                if(!initialValue) {
-                    acc = arrOrObj[arrOrObj.length -1];
-                    startIndex = arrOrObj.length -2;
+                if (!initialValue) {
+                    acc = arrOrObj[arrOrObj.length - 1];
+                    startIndex = arrOrObj.length - 2;
                 } else {
                     acc = initialValue;
                 }
@@ -505,11 +534,11 @@ class ArrMan {
             case '[object Object]': {
                 const keys = Object.keys(arrOrObj);
                 const values = Object.values(arrOrObj);
-                if(!initialValue) {
-                    acc = values[values.length -1];
-                    startIndex = values.length -2;
+                if (!initialValue) {
+                    acc = values[values.length - 1];
+                    startIndex = values.length - 2;
                 }
-                for(let i = startIndex; i > -1; i--) {
+                for (let i = startIndex; i > -1; i--) {
                     acc = func(acc, values[i], keys[i]);
                 }
                 break;
@@ -520,6 +549,35 @@ class ArrMan {
         }
 
         return acc;
+    }
+
+    static includes(collection, value) {
+        const type = Object.prototype.toString.call(collection);
+        let doestItInclude = false;
+        switch (type) {
+            case '[object Array]':
+                for (let el of collection) {
+                    if (value === el) doestItInclude = true;
+                }
+                break;
+            case '[object String]':
+                for (let char of collection) {
+                    if (value === char) doestItInclude = true;
+                }
+                break;
+            case '[object Object]':
+                const values = Object.values(collection);
+                for (let val of values) {
+                    if (val === value) doestItInclude = true;
+                }
+                break;
+            default:
+                throw new Error('invalid data type');
+
+
+
+        }
+        return doestItInclude;
     }
 
 }
