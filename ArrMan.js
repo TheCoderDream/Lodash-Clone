@@ -610,4 +610,65 @@ class ArrMan {
 
     }
 
+    static shuffle(arr) {
+        const size = arr.length;
+        const shuffledArr = [];
+        const usedIndexses = {};
+
+        let i = 0;
+
+        while (i < size) {
+            let randomIndex = ArrMan.getRandomInt(0, size);
+            if(!usedIndexses[randomIndex]) {
+                usedIndexses[randomIndex] = ' ';
+                shuffledArr.push(arr[randomIndex]);
+                i++;
+            }
+        }
+
+        return shuffledArr;
+    }
+
+    static size(collection) {
+        const type = Object.prototype.toString.call(collection);
+
+        if(type === '[object Object]') return Object.keys(collection).length;
+        return collection.length;
+    }
+
+    static find(arr, funcOrFilter) {
+        const type = Object.prototype.toString.call(funcOrFilter);
+        let foundValue;
+
+        switch (type) {
+            case '[object Function]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (funcOrFilter(arr[i], i, arr)) {
+                        foundValue = arr[i];
+                        break;
+                    }
+                }
+                break;
+            case '[object String]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i][funcOrFilter]) {
+                        foundValue = arr[i];
+                        break;
+                    }
+                }
+                break;
+
+            case '[object Array]':
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i][funcOrFilter[0]] === funcOrFilter[1]) {
+                        foundValue = arr[i];
+                        break;
+                    }
+                }
+                break;
+        }
+
+        return foundValue;
+    }
+
 }
