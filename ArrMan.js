@@ -446,4 +446,80 @@ class ArrMan {
         return filtredArr;
     }
 
+    static reduce(arrOrObj, func, initialValue) {
+        const type = Object.prototype.toString.call(arrOrObj);
+        let startIndex = 0;
+        let acc;
+
+        switch (type) {
+            case '[object Array]':
+                if(!initialValue) {
+                    acc = arrOrObj[0];
+                    startIndex++
+                } else {
+                    acc = initialValue;
+                }
+
+                for (let i = startIndex; i < arrOrObj.length; i ++) {
+                    acc = func(acc, arrOrObj[i], i, arrOrObj);
+                }
+                break;
+            case '[object Object]': {
+                const keys = Object.keys(arrOrObj);
+                const values = Object.values(arrOrObj);
+                if(!initialValue) {
+                    acc = values[0];
+                    startIndex++;
+                }
+                for(let i = startIndex; i < keys.length; i++) {
+                    acc = func(acc, values[i], keys[i]);
+                }
+                break;
+            }
+            default:
+                return new Error('Invalid Data Type');
+
+        }
+
+        return acc;
+    }
+
+    static reduceRight(arrOrObj, func, initialValue) {
+        const type = Object.prototype.toString.call(arrOrObj);
+        let startIndex = 0;
+        let acc;
+
+        switch (type) {
+            case '[object Array]':
+                if(!initialValue) {
+                    acc = arrOrObj[arrOrObj.length -1];
+                    startIndex = arrOrObj.length -2;
+                } else {
+                    acc = initialValue;
+                }
+
+                for (let i = startIndex; i > -1; i--) {
+                    acc = func(acc, arrOrObj[i], i, arrOrObj);
+                }
+                break;
+            case '[object Object]': {
+                const keys = Object.keys(arrOrObj);
+                const values = Object.values(arrOrObj);
+                if(!initialValue) {
+                    acc = values[values.length -1];
+                    startIndex = values.length -2;
+                }
+                for(let i = startIndex; i > -1; i--) {
+                    acc = func(acc, values[i], keys[i]);
+                }
+                break;
+            }
+            default:
+                return new Error('Invalid Data Type');
+
+        }
+
+        return acc;
+    }
+
 }
