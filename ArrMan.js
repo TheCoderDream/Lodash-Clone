@@ -580,4 +580,34 @@ class ArrMan {
         return doestItInclude;
     }
 
+    static getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+    }
+
+    static sample(arr) {
+        return arr[ArrMan.getRandomInt(0, arr.length)];
+    }
+
+    static sampleSize(arr, size) {
+        if(arr && arr.length === 0) return;
+        const samples = [];
+
+        const usedIndexses = {};
+
+        let i = 0;
+        while (i < size) {
+            let randomIndex = ArrMan.getRandomInt(0, arr.length);
+            if(!usedIndexses[randomIndex]) {
+                usedIndexses[randomIndex] = ' ';
+                samples.push(arr[randomIndex]);
+                i++;
+            }
+        }
+
+        return samples;
+
+    }
+
 }
