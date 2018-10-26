@@ -745,4 +745,33 @@ class ArrMan {
 
     }
 
+    static without(arr, ...args) {
+        const argsDictionary = ArrMan.arrMaper(args);
+        const result = [];
+
+        for(let el of arr) {
+            if(!argsDictionary[el]) result.push(el);
+        }
+
+        return result;
+    }
+
+    static xor() {
+        const argsArr = Array.from(arguments);
+        const normalizedArr = [];
+        const result = [];
+        for(let arr of argsArr) {
+            normalizedArr.concat(arr);
+        }
+
+        const argsDictionary = ArrMan.arrMaper(normalizedArr);
+
+        for(let el of normalizedArr) {
+            if(argsDictionary[el] === 1) result.push(el);
+        }
+
+        return result;
+    }
+    
+
 }
