@@ -772,6 +772,102 @@ class ArrMan {
 
         return result;
     }
-    
+
+
+    static capitalize(str) {
+        return str[0].toUpperCase() + str.slice(1).toLowerCase();
+    }
+
+    static endsWith(str, endChar, position) {
+        position = (position && position< str.length) ? str.length - position: str.length -1;
+
+        return str[position] === endChar;
+    }
+
+    static toLower(str) {
+        let loweredStr = '';
+
+        for(let i = 0; i < str.length; i++ ) {
+            if(str[i].charCodeAt() <= 90 && str[i].charCodeAt() >= 65) {
+                loweredStr += String.fromCharCode(str[i].charCodeAt() + 32);
+                continue;
+            }
+            loweredStr += str[i];
+        }
+
+        return loweredStr;
+    }
+
+    static toUpper(str) {
+        let loweredStr = '';
+
+        for(let i = 0; i < str.length; i++ ) {
+            if(str[i].charCodeAt() <= 122 && str[i].charCodeAt() >= 97) {
+                loweredStr += String.fromCharCode(str[i].charCodeAt() - 32);
+                continue;
+            }
+            loweredStr += str[i];
+        }
+
+        return loweredStr;
+    }
+
+
+    static trim(str, chars) {
+
+        let toFront = 0;
+        chars = chars || ' ';
+
+        let newStr;
+        for (let i = 0; i < str.length ; i++) {
+            if(chars.includes(str[i])) toFront++;
+            else break;
+        }
+
+        if(toFront > 0){
+            newStr = str.slice(toFront);
+            console.log(newStr);
+        } else {
+            newStr = str;
+        }
+
+        let toBack= newStr.length -1;
+        for (let i = newStr.length -1; i > -1 ; i--) {
+            if(chars.includes(newStr[i])) toBack--;
+            else break;
+        }
+
+        if(toBack < newStr.length -1){
+            newStr = newStr.substr(0, toBack +1);
+            console.log(newStr)
+        }
+
+        return newStr;
+    }
+
+
+    static trimEnd(str, chars) {
+        chars = chars || ' ';
+        let toBack = str.length;
+
+        for (let i = str.length -1; i > -1 ; i-- ) {
+            if(chars.includes(str[i])) toBack++;
+            else break;
+        }
+
+        return str.substr(0, toBack) ;
+    }
+
+    static trimStart(str, chars) {
+        chars = chars || ' ';
+        let toFront = str.length;
+
+        for (let i = 0; i < str.length  ; i++ ) {
+            if(chars.includes(str[i])) toFront++;
+            else break;
+        }
+
+        return str.substr(toFront) ;
+    }
 
 }
