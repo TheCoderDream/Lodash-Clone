@@ -66,7 +66,6 @@ var users = [
   { 'user': 'fred' }
 ];
  
-// The `_.property` iteratee shorthand.
 ArrMan.map(users, 'user');
 // => ['barney', 'fred']
 ```
@@ -80,16 +79,13 @@ var users = [
  
 ArrMan.filter(users, function(o) { return !o.active; });
 // => objects for ['fred']
- 
-// The `_.matches` iteratee shorthand.
+
 ArrMan.filter(users, { 'age': 36, 'active': true });
 // => objects for ['barney']
- 
-// The `_.matchesProperty` iteratee shorthand.
+
 ArrMan.filter(users, ['active', false]);
 // => objects for ['fred']
- 
-// The `_.property` iteratee shorthand.
+
 ArrMan.filter(users, 'active');
 // => objects for ['barney']
 ```
@@ -103,16 +99,13 @@ var users = [
  
 ArrMan.reject(users, function(o) { return !o.active; });
 // => objects for ['fred']
- 
-// The `_.matches` iteratee shorthand.
+
 ArrMan.reject(users, { 'age': 40, 'active': true });
 // => objects for ['barney']
- 
-// The `_.matchesProperty` iteratee shorthand.
+
 ArrMan.reject(users, ['active', false]);
 // => objects for ['fred']
- 
-// The `_.property` iteratee shorthand.
+
 ArrMan.reject(users, 'active');
 // => objects for ['barney']
 ```
@@ -127,16 +120,13 @@ var users = [
  
 ArrMan.find(users, function(o) { return o.age < 40; });
 // => object for 'barney'
- 
-// The `_.matches` iteratee shorthand.
+
 ArrMan.find(users, { 'age': 1, 'active': true });
 // => object for 'pebbles'
- 
-// The `_.matchesProperty` iteratee shorthand.
+
 ArrMan.find(users, ['active', false]);
 // => object for 'fred'
- 
-// The `_.property` iteratee shorthand.
+
 ArrMan.find(users, 'active');
 // => object for 'barney'
 ```
@@ -151,15 +141,13 @@ var users = [
   { 'user': 'fred',   'age': 40, 'active': false }
 ];
  
-// The `_.matches` iteratee shorthand.
+
 ArrMan.every(users, { 'user': 'barney', 'active': false });
 // => false
  
-// The `_.matchesProperty` iteratee shorthand.
 ArrMan.every(users, ['active', false]);
 // => true
  
-// The `_.property` iteratee shorthand.
 ArrMan.every(users, 'active');
 // => false
 ```
@@ -174,11 +162,9 @@ var users = [
   { 'user': 'fred',   'active': false }
 ];
  
-// The `ArrMan.matches` iteratee shorthand.
 ArrMan.some(users, { 'user': 'barney', 'active': false });
 // => false
  
-// The `ArrMan.matchesProperty` iteratee shorthand.
 ArrMan.some(users, ['active', false]);
 // => true
  
