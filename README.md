@@ -5,6 +5,263 @@ Using the library:
 
 **DOCS:**
 
+_Using Array **reduce**_
+```js
+ArrMan.reduce([1, 2], function(sum, n) {
+  return sum + n;
+}, 0);
+// => 3
+ 
+ArrMan.reduce({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
+  (result[value] || (result[value] = [])).push(key);
+  return result;
+}, {});
+// => { '1': ['a', 'c'], '2': ['b'] } (iteration order is not guaranteed)
+```
+
+_Using Array **reduceRight**_
+```js
+var array = [[0, 1], [2, 3], [4, 5]];
+ 
+ArrMan.reduceRight(array, function(flattened, other) {
+  return flattened.concat(other);
+}, []);
+// => [4, 5, 2, 3, 0, 1]
+```
+
+_Using Array **forEach**_
+```js
+ArrMan.forEach([1, 2], function(value) {
+  console.log(value);
+});
+// => Logs `1` then `2`.
+ 
+ArrMan.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
+  console.log(key);
+});
+```
+
+_Using Array **forEachRight**_
+```js
+ArrMan.forEachRight([1, 2], function(value) {
+  console.log(value);
+});
+// => Logs `2` then `1`
+```
+
+_Using Array **map**_
+```js
+function square(n) {
+  return n * n;
+}
+ 
+ArrMan.map([4, 8], square);
+// => [16, 64]
+ 
+ArrMan.map({ 'a': 4, 'b': 8 }, square);
+// => [16, 64] (iteration order is not guaranteed)
+ 
+var users = [
+  { 'user': 'barney' },
+  { 'user': 'fred' }
+];
+ 
+// The `_.property` iteratee shorthand.
+ArrMan.map(users, 'user');
+// => ['barney', 'fred']
+```
+
+_Using Array **filter**_
+```js
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': true },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+ 
+ArrMan.filter(users, function(o) { return !o.active; });
+// => objects for ['fred']
+ 
+// The `_.matches` iteratee shorthand.
+ArrMan.filter(users, { 'age': 36, 'active': true });
+// => objects for ['barney']
+ 
+// The `_.matchesProperty` iteratee shorthand.
+ArrMan.filter(users, ['active', false]);
+// => objects for ['fred']
+ 
+// The `_.property` iteratee shorthand.
+ArrMan.filter(users, 'active');
+// => objects for ['barney']
+```
+
+_Using Array **reject**_
+```js
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': false },
+  { 'user': 'fred',   'age': 40, 'active': true }
+];
+ 
+ArrMan.reject(users, function(o) { return !o.active; });
+// => objects for ['fred']
+ 
+// The `_.matches` iteratee shorthand.
+ArrMan.reject(users, { 'age': 40, 'active': true });
+// => objects for ['barney']
+ 
+// The `_.matchesProperty` iteratee shorthand.
+ArrMan.reject(users, ['active', false]);
+// => objects for ['fred']
+ 
+// The `_.property` iteratee shorthand.
+ArrMan.reject(users, 'active');
+// => objects for ['barney']
+```
+
+_Using Array **find**_
+```js
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': true },
+  { 'user': 'fred',    'age': 40, 'active': false },
+  { 'user': 'pebbles', 'age': 1,  'active': true }
+];
+ 
+ArrMan.find(users, function(o) { return o.age < 40; });
+// => object for 'barney'
+ 
+// The `_.matches` iteratee shorthand.
+ArrMan.find(users, { 'age': 1, 'active': true });
+// => object for 'pebbles'
+ 
+// The `_.matchesProperty` iteratee shorthand.
+ArrMan.find(users, ['active', false]);
+// => object for 'fred'
+ 
+// The `_.property` iteratee shorthand.
+ArrMan.find(users, 'active');
+// => object for 'barney'
+```
+
+_Using Array **every**_
+```js
+ArrMan.every([true, 1, null, 'yes'], Boolean);
+// => false
+ 
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': false },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+ 
+// The `_.matches` iteratee shorthand.
+ArrMan.every(users, { 'user': 'barney', 'active': false });
+// => false
+ 
+// The `_.matchesProperty` iteratee shorthand.
+ArrMan.every(users, ['active', false]);
+// => true
+ 
+// The `_.property` iteratee shorthand.
+ArrMan.every(users, 'active');
+// => false
+```
+
+_Using Array **some**_
+```js
+_.some([null, 0, 'yes', false], Boolean);
+// => true
+ 
+var users = [
+  { 'user': 'barney', 'active': true },
+  { 'user': 'fred',   'active': false }
+];
+ 
+// The `ArrMan.matches` iteratee shorthand.
+ArrMan.some(users, { 'user': 'barney', 'active': false });
+// => false
+ 
+// The `ArrMan.matchesProperty` iteratee shorthand.
+ArrMan.some(users, ['active', false]);
+// => true
+ 
+// The `ArrMan.property` iteratee shorthand.
+ArrMan.some(users, 'active');
+// => true
+```
+
+_Using Array **sample**_
+```js
+ArrMan.sample([1, 2, 3, 4]);
+// => 2
+```
+
+_Using Array **sampleSize**_
+```js
+ArrMan.sampleSize([1, 2, 3], 2);
+// => [3, 1]
+ 
+ArrMan.sampleSize([1, 2, 3], 4);
+// => [2, 3, 1]
+```
+
+_Using Array **shuffle**_
+```js
+ArrMan.shuffle([1, 2, 3, 4]);
+// => [4, 1, 3, 2]
+```
+
+_Using Array **shuffle**_
+```js
+ArrMan.shuffle([1, 2, 3, 4]);
+// => [4, 1, 3, 2]
+```
+
+_Using Array **reverse**_
+```js
+ArrMan.size([1, 2, 3]);
+// => 3
+ 
+ArrMan.size({ 'a': 1, 'b': 2 });
+// => 2
+ 
+ArrMan.size('pebbles');
+// => 7
+```
+
+_Using Array **take**_
+```js
+ArrMan.take([1, 2, 3]);
+// => [1]
+ 
+ArrMan.take([1, 2, 3], 2);
+// => [1, 2]
+ 
+ArrMan.take([1, 2, 3], 5);
+// => [1, 2, 3]
+ 
+ArrMan.take([1, 2, 3], 0);
+// => []
+```
+
+_Using Array **takeRight**_
+```js
+ArrMan.takeRight([1, 2, 3]);
+// => [3]
+ 
+ArrMan.takeRight([1, 2, 3], 2);
+// => [2, 3]
+ 
+ArrMan.takeRight([1, 2, 3], 5);
+// => [1, 2, 3]
+ 
+ArrMan.takeRight([1, 2, 3], 0);
+// => []
+```
+
+_Using Array **union**_
+```js
+ArrMan.union([2], [1, 2]);
+// => [2, 1]
+```
+
 _Using Array **Chunk**_
 ```js
 ArrMan.chunk(['a', 'b', 'c', 'd'], 2);

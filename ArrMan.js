@@ -371,12 +371,14 @@ class ArrMan {
 
     }
 
-    static forEach(objOrArr, func) {
+
+    static forEachRight(objOrArr, func) {
+
         const type = Object.prototype.toString.call(objOrArr);
 
         switch (type) {
             case '[object Array]':
-                for (let i = 0; i < objOrArr.length; i++) {
+                for (let i = objOrArr.length - 1; i > -1; i--) {
                     func(objOrArr[i], i, objOrArr);
                 }
                 break;
@@ -391,12 +393,6 @@ class ArrMan {
                 return new Error('Invalid type');
         }
 
-    }
-
-    static forEachRight(arr, func) {
-        for (let i = arr.length - 1; i > -1; i--) {
-            func(arr[i], i, arr);
-        }
     }
 
     static map(objOrArr, func) {
