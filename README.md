@@ -1,5 +1,5 @@
 # ArrMan-A-library-for-Array-Manipulation
-**This library is just for demonstration my coding skill and a utility that i use in my own project**
+**This library is just for demonstration my coding skill and a utility that i use in my own projects.it is heavily inspired from Lodash Library, but entire implementation by me **
 
 Using the library:
 
