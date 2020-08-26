@@ -1,4 +1,4 @@
-# ArrMan-A-library-for-Array-Manipulation
+# LODASH CLONE
 **This library is just for demonstration my coding skill and a utility that i use in my own projects.it is heavily inspired from Lodash Library, but entire implementation by me **
 
 Using the library:
